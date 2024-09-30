@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
+import Router from "next/router";
 import useRequest from '../../hooks/use-request';
 
 export default () => {
@@ -17,6 +17,9 @@ export default () => {
 
     const onSubmit = async (event) => {
         event.preventDefault();
+
+        Router.push('/');
+        
         doRequest ();
     
     }
