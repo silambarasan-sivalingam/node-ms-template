@@ -1,5 +1,6 @@
 import axios from "axios";
 
+// request from component
 const LandingPage = ({ currentUser }) => {
   console.log(currentUser);
   axios.get('/api/users/currentuser').catch((err) => {
@@ -10,6 +11,7 @@ const LandingPage = ({ currentUser }) => {
 };
 
 
+// request from getInitialProps
 LandingPage.getInitialProps = async () => {
     const response = await axios.get('/api/users/currentuser');
 
