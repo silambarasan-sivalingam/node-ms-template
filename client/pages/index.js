@@ -13,9 +13,12 @@ const LandingPage = ({ currentUser }) => {
 
 // request from getInitialProps
 LandingPage.getInitialProps = async () => {
-    const response = await axios.get('/api/users/currentuser');
+    // const response = await axios.get('/api/users/currentuser');
 
-    return response.data ;
+    // return response.data ;
+
+    console.log('Landing Page getInitialProps');
+    return {};
 }
 
 export default LandingPage;
