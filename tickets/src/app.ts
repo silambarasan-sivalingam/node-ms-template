@@ -4,8 +4,7 @@ import { json } from 'body-parser'
 
 import cookieSession from 'cookie-session';
 
-import { errorHandler } from '@silambarasansivalingam/common'
-import { NotFoundError } from '@silambarasansivalingam/common'
+import { errorHandler, NotFoundError, currentUser  } from '@silambarasansivalingam/common'
 
 import { createTicketRouter } from './routes/new'   
 
@@ -13,6 +12,7 @@ import { createTicketRouter } from './routes/new'
 const app = express();
 app.set('trust proxy', true)
 app.use(json());
+
 app.use(
     cookieSession({
         signed: false,
@@ -20,6 +20,7 @@ app.use(
     })
 )
 
+app.use(currentUser)
 app.use(createTicketRouter)
 
 
