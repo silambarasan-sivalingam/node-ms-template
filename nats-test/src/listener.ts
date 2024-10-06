@@ -12,7 +12,7 @@ stan.on('connect', () => {
 
     const options = stan
         .subscriptionOptions()
-        // .setManualAckMode(true)
+        .setManualAckMode(true)
         // .setDeliverAllAvailable()
         // .setDurableName('orders-service');
 
