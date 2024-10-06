@@ -24,7 +24,7 @@ stan.on('connect', () => {
 
     const subscription = stan.subscribe(
         'ticket:created', 
-        'orders-queue-group',
+        'queue-group-name',
         options
     );
 
