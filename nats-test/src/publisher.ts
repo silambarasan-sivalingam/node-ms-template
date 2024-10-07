@@ -11,7 +11,7 @@ stan.on('connect', () => {
 
     const publisher = new TicketCreatedPublisher(stan);
     try {
-        publisher.publish({
+         publisher.publish({
             id: '123',
             title: 'concert',
             price: 20
