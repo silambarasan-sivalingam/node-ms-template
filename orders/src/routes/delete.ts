@@ -1,4 +1,3 @@
-import { DeleteOperation } from './../../node_modules/mongodb/src/operations/delete';
 import express, { Request, Response } from 'express';
 import { NotFoundError } from '@silambarasansivalingam/common';
 
