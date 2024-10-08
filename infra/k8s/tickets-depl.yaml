@@ -27,12 +27,21 @@ spec:
                 name: jwt-secret
                 key: JWT_KEY
 
+          - name: NATS_URL
+            value: nats://nats-srv:4222
+
+          - name: NATS_CLUSTER_ID
+            value: ticketing
+
+          - name: NATS_CLIENT_ID
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+
         # resources:
         #   limits:
         #     memory: "128Mi"
         #     cpu: "500m"
-        # ports:
-        # - containerPort: <Port>
 ---
 
 apiVersion: v1
