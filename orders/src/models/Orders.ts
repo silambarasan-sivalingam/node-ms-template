@@ -1,54 +1,53 @@
-// import mongoose from "mongoose";
 
-// interface TicketAttrs {
+import mongoose from "mongoose";
 
-//     title: string;
-//     price: number;
-//     userId: string;
+interface OrderAttrs {
+    userId: string;
+    status: string;
+    expiresAt: Date;
+    ticket: TicketDoc;
+}
 
-// }
+interface OrderDoc extends mongoose.Document {  
+    userId: string;
+    status: string;
+    expiresAt: Date;
+    ticket: TicketDoc;
+}
 
-// interface TicketDoc extends mongoose.Document {
-//     title: string;
-//     price: number;
-//     userId: string;
+interface OrderModel extends mongoose.Model<OrderDoc> {
+    build(attrs: OrderAttrs): OrderDoc;
+}
 
-// }
+const orderSchema = new mongoose.Schema({
+    userId: {
+        type: String,
+        required: true
+    },
+    status: {
+        type: String,
+        required: true
+    },
+    expiresAt: {
+        type: mongoose.Schema.Types.Date
+    },
+    ticket: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Ticket'
+    }
+}, {
+    toJSON: {
+        transform(doc, ret) {
+            ret.id = ret._id;
+            delete ret._id;
+        }
+    }
+});
 
-// interface TicketModel extends mongoose.Model<TicketDoc> {
+orderSchema.statics.build = (attrs: OrderAttrs) => {
+    return new Order(attrs);
+}
 
-//     build(attrs: TicketAttrs): TicketDoc;
+const Order = mongoose.model<OrderDoc, OrderModel>('Order', orderSchema);
 
-// }
-
-// const ticketSchema = new mongoose.Schema({
-//     title: {
-//         type: String,
-//         required: true
-//     },
-//     price: {
-//         type: Number,
-//         required: true
-//     },
-//     userId: {
-//         type: String,
-//         required: true
-//     }
-
-// }, {
-//     toJSON: {
-//         transform(doc, ret) {
-//             ret.id = ret._id
-//             delete ret._id
-//         }
-//     }
-// })
-
-// ticketSchema.statics.build = (attrs: TicketAttrs) => {
-//     return new Ticket(attrs)
-// }
-
-// const Ticket = mongoose.model<TicketDoc, TicketModel>('Ticket', ticketSchema);
-
-
-// export { Ticket };
+export { Order };
