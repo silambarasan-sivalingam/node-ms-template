@@ -1,3 +1,8 @@
 export const natsWrapper = {
-    client : null,
-}
+    client : {
+        publish: 
+            (subject: string, data: string, callback: () => void) => {
+                callback();
+            }
+    }
+    }
