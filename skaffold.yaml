@@ -28,6 +28,15 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
+
+    - image: silambarasansivalingam/orders
+      context: orders
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
             
     - image: silambarasansivalingam/client
       context: client
