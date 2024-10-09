@@ -5,8 +5,6 @@ import { body } from 'express-validator';
 import { Ticket} from '../models/Ticket';
 import { Order } from '../models/Order';
 
-
-
 const router = express.Router()
 
 const EXPIRATION_WINDOW_SECONDS = 15 * 60;
