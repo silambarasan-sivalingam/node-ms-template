@@ -1,19 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BadRequestError = void 0;
-const CustomError_1 = require("./CustomError");
-class BadRequestError extends CustomError_1.CustomError {
+const custom_error_1 = require("./custom-error");
+class BadRequestError extends custom_error_1.CustomError {
     constructor(message) {
         super(message);
         this.message = message;
-        this.statusCode = 404;
-        // Only because we are extending a build in class
+        this.statusCode = 400;
         Object.setPrototypeOf(this, BadRequestError.prototype);
     }
     serializeErrors() {
-        return [{
-                message: this.message
-            }];
+        return [{ message: this.message }];
     }
 }
 exports.BadRequestError = BadRequestError;

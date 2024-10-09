@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.requireAuth = void 0;
-const NotAuthorizedError_1 = require("../errors/NotAuthorizedError");
+const not_authorized_error_1 = require("../errors/not-authorized-error");
 const requireAuth = (req, res, next) => {
     if (!req.currentUser) {
-        throw new NotAuthorizedError_1.NotAuthorizedError();
+        throw new not_authorized_error_1.NotAuthorizedError();
     }
     next();
 };

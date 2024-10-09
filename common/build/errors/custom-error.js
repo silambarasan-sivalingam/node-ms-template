@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CustomError = void 0;
 class CustomError extends Error {
     constructor(message) {
-        super();
+        super(message);
         Object.setPrototypeOf(this, CustomError.prototype);
     }
 }
