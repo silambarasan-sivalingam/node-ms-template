@@ -27,15 +27,33 @@ it('fetches orders for a particular user', async () => {
     const userTwo = global.signin();
 
     // Create one order as User #1
+    const responseOne = await request(app)
+        .post('/api/orders')
+        .set('Cookie', userOne)
+        .send({ ticketId: ticketOne.id })
+        .expect(201);
 
 
     // Create two orders as User #2
-
+    const responseTwo = await request(app)
+        .post('/api/orders')
+        .set('Cookie', userTwo)
+        .send({ ticketId: ticketTwo.id })
+        .expect(201);
 
     // Make request to get orders for User #2
 
+    const response = await request(app)
+        .get('/api/orders')
+        .set('Cookie', userTwo)
+        .expect(200);
 
     // Make sure we only got the orders for User #2
+    console.log(response.body);
+    expect(response.body.length).toEqual(2);
+    expect(response.body[0].id).toEqual(orderOne.id);
+    expect(response.body[1].id).toEqual(orderTwo.id);
+
 
 
 });
