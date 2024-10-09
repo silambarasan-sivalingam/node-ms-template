@@ -20,7 +20,7 @@ router.delete('/api/orders/:orderId', async (req: Request, res: Response) => {
     await order.save();
 
     // publishing an event saying this was cancelled!
-    res.send({});
+    res.send(204).send(order);
 });
 
 export { router as deleteOrderRouter };
