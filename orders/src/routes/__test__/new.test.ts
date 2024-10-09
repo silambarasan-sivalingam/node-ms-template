@@ -43,7 +43,6 @@ it('return an error if the ticket is already reserved', async () => {
     .expect(400);
 }); 
 
-
 it('reserves a ticket', async () => {
 
 });
