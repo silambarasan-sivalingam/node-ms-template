@@ -1,6 +1,9 @@
 import request from 'supertest';
 import { app } from '../../app';
 import mongoose from 'mongoose';
+import { Order } from '../../models/Order';
+import { Ticket } from '../../models/Ticket';
+import { natsWrapper } from '../../nats-wrapper';
 
 it('return an error if the tickets does not exist', async () => {
 const ticketId = new mongoose.Types.ObjectId();
@@ -15,7 +18,8 @@ const ticketId = new mongoose.Types.ObjectId();
 });
 
 it('return an error if the ticket is already reserved', async () => {
-  
+
+
 
 }); 
 
