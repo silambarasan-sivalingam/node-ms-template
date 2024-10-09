@@ -15,6 +15,7 @@ const ticketId = new mongoose.Types.ObjectId();
 });
 
 it('return an error if the ticket is already reserved', async () => {
+  
 
 }); 
 
