@@ -1,8 +1,11 @@
 import express, { Request, Response } from 'express';
 import mongoose from 'mongoose';
-import { requireAuth, NotFoundError, validateRequest, BadRequestError } from '@silambarasansivalingam/common';
+import { requireAuth, NotFoundError, validateRequest, BadRequestError, OrderStatus } from '@silambarasansivalingam/common';
 import { body } from 'express-validator';
 import { Ticket} from '../models/Ticket';
+import { Order } from '../models/Order';
+
+
 
 const router = express.Router()
 
@@ -46,11 +49,16 @@ router.post('/api/orders',
 
 
     //Build the order and save it to the database
+    const order = Order.build({
+      userId: req.currentUser!.id,
+      status: OrderStatus.Created,
+      expiresAt: expiration,
+      ticket: ticket,
+    });
 
+    await order.save();
     //Publish an event saying that an order was created
-    res.send({});
+    res.status(201).send(order)
   });
-
-
 
 export { router as newOrderRouter };
