@@ -33,7 +33,7 @@ it('return an error if the ticket is already reserved', async () => {
     expiresAt: new Date()
   });
   await order.save();
-  
+
   await request(app)
     .post('/api/orders')
     .set('Cookie', global.signin())
@@ -41,8 +41,8 @@ it('return an error if the ticket is already reserved', async () => {
       ticketId : ticket.id
     })
     .expect(400);
-
 }); 
+
 
 it('reserves a ticket', async () => {
 
