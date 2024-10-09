@@ -1,10 +1,8 @@
 import express, { Request, Response } from 'express';
 import mongoose from 'mongoose';
-import { requireAuth, NotFoundError, validateRequest, OrderStatus, BadRequestError } from '@silambarasansivalingam/common';
+import { requireAuth, NotFoundError, validateRequest, BadRequestError } from '@silambarasansivalingam/common';
 import { body } from 'express-validator';
-import { Ticket } from '../models/Ticket';
-import { Order } from '../models/Order';
-
+import { Ticket} from '../models/Ticket';
 
 const router = express.Router()
 
@@ -28,22 +26,14 @@ router.post('/api/orders',
       throw new NotFoundError();
     }
 
+    const isReserved = await ticket.isReserved();
+
     //Make sure that this ticket is not already reserved
     // Run query to look at all orders. Find an order where the ticket
     // is the ticket we just found *and* the orders status is *not* cancelled.
     // If we find an order from that means the ticket *is* reserved
-    const existingOrder = await Order.findOne({
-        ticket: ticket,
-        status: {
-        $in: [
-          OrderStatus.Created,
-          OrderStatus.AwaitingPayment,
-          OrderStatus.Complete
-        ]
-      }
-    });
 
-    if (existingOrder) {
+    if (isReserved) {
       throw new BadRequestError('Ticket is already reserved');
     }
 
