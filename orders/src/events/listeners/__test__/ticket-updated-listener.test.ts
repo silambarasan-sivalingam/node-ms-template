@@ -26,11 +26,13 @@ it('creates and saves a ticket', async () => {
     // Write assertions to make sure a ticket was created
 });
 
+
 it('acks the message', async () => {
     // Call the onMessage function with the data object + message object
 
     // Write assertions to make sure ack function is called
 });
+
 
 it('publishes an event', async () => {
     // Create an instance of the listener
