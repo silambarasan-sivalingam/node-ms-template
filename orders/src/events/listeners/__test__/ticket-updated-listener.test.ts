@@ -67,6 +67,22 @@ it('acks the message', async () => {
 });
 
 
+it('does not call ack if the event has a skipped version number', async () => {
+    // Create a listener
+    const { listener, data, msg } = await setup();
+
+    data.version = 10;
+
+    try {
+        await listener.onMessage(data, msg);
+    } catch (err) {
+
+    }
+
+    expect(msg.ack).not.toHaveBeenCalled();
+});
+
+
 it('publishes an event', async () => {
     // Create an instance of the listener
 });
