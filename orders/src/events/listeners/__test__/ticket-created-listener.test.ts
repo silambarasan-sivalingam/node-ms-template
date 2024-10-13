@@ -1,9 +1,9 @@
 import { Message } from 'node-nats-streaming';
 import { TicketCreatedEvent } from '@silambarasansivalingam/common';
-import { TicketCreatedListener } from './ticket-created-listener';
-import { natsWrapper } from '../../nats-wrapper';
+import { TicketCreatedListener } from '../ticket-created-listener';
+import { natsWrapper } from '../../../nats-wrapper';
 import mongoose from 'mongoose';
-import { Ticket } from '../../models/Ticket';
+import { Ticket } from '../../../models/Ticket';
 
 const setup = async () => {
 
@@ -50,14 +50,15 @@ it('creates and saves a ticker', async() => {
 })
 
 it('acks the message', async() => {
-    
-    // create an instance of the listener
 
-    // create a fake data event
-
-    // create a fake message object
+    const { listener, data, msg } = await setup();
 
     // call the onMessage function with the data object + message object
+    await listener.onMessage(data, msg);
+
+    // write assertions to make sure ack function was called
+    expect(msg.ack).toHaveBeenCalled();
+
 
 })
 
