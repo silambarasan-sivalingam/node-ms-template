@@ -49,6 +49,7 @@ it('creates and saves a ticket', async () => {
 
     expect(updatedTicket!.title).toEqual(data.title);
     expect(updatedTicket!.price).toEqual(data.price);
+    expect(updatedTicket!.version).toEqual(data.version);
 
     // Write assertions to make sure a ticket was created
 });
