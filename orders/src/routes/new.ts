@@ -31,7 +31,6 @@ router.post('/api/orders',
       throw new NotFoundError();
     }
 
-
     //Make sure that this ticket is not already reserved
     // Run query to look at all orders. Find an order where the ticket
     // is the ticket we just found *and* the orders status is *not* cancelled.
@@ -57,6 +56,7 @@ router.post('/api/orders',
     });
 
     await order.save();
+    
     //Publish an event saying that an order was created
 
     new OrderCreatedPublisher(natsWrapper.client).publish({
