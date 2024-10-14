@@ -21,7 +21,7 @@ export class ExpirationCompleteListener extends Listener<ExpirationCompleteEvent
             status: OrderStatus.Cancelled,
         });
 
-        await order.save();
+        await order.save(); 
 
         new OrderCancelledPublisher(this.client).publish({
             id: order.id,
@@ -35,3 +35,5 @@ export class ExpirationCompleteListener extends Listener<ExpirationCompleteEvent
         msg.ack();
     }
 }
+
+
