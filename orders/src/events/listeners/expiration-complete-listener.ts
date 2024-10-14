@@ -2,6 +2,7 @@ import { Listener, Subjects, ExpirationCompleteEvent, OrderStatus } from "@silam
 import { Message } from "node-nats-streaming";
 import { queueGroupName } from "./queue-group-name";
 import { Order } from "../../models/Order";
+import { OrderCancelledPublisher } from "../publishers/order-cancelled-publisher";
 
 export class ExpirationCompleteListener extends Listener<ExpirationCompleteEvent> {
 
@@ -21,6 +22,14 @@ export class ExpirationCompleteListener extends Listener<ExpirationCompleteEvent
         });
 
         await order.save();
+
+        new OrderCancelledPublisher(this.client).publish({
+            id: order.id,
+            version: order.version,
+            ticket: {
+                id: order.ticket.id
+            }
+        });
 
         console.log('Expiration complete event received for orderId:', data.orderId);
         msg.ack();
