@@ -1,4 +1,4 @@
-import { Listener, Subjects, ExpirationCompleteEvent } from "@silambarasansivalingam/common";
+import { Listener, Subjects, ExpirationCompleteEvent, OrderStatus } from "@silambarasansivalingam/common";
 import { Message } from "node-nats-streaming";
 import { queueGroupName } from "./queue-group-name";
 import { Order } from "../../models/Order";
@@ -17,9 +17,9 @@ export class ExpirationCompleteListener extends Listener<ExpirationCompleteEvent
         }
 
         order.set({
-            status: 'cancelled',
+            status: OrderStatus.Cancelled,
         });
-        
+
         await order.save();
 
         console.log('Expiration complete event received for orderId:', data.orderId);
