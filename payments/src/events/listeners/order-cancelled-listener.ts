@@ -2,7 +2,6 @@ import { Listener, OrderCancelledEvent, OrderStatus, Subjects } from "@silambara
 import { queueGroupName } from "./queue-group-name";
 import { Message } from "node-nats-streaming";
 import { Order } from "../../models/order";
-import { idText } from "typescript";
 
 export class OrderCancelledListener extends Listener<OrderCancelledEvent> {
     subject: Subjects.OrderCancelled = Subjects.OrderCancelled;
