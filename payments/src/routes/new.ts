@@ -4,6 +4,8 @@ import { requireAuth, validateRequest, BadRequestError, NotFoundError, NotAuthor
 import { Order} from '../models/order';
 import { Payment } from '../models/payment';
 import { stripe } from '../stripe';
+import { PaymentCreatedPublisher } from '../events/publisher/payment-created-publisher';
+import { natsWrapper } from '../nats-wrapper';
 
 
 const router = exppress.Router();
@@ -42,8 +44,13 @@ router.post('/api/payments', requireAuth, [
 
   await payment.save();
 
+  await new PaymentCreatedPublisher(natsWrapper.client).publish({
+    id: payment.id,
+    orderId: payment.orderId,
+    stripeId: payment.stripeId
+  });
 
-  res.status(201).send({ success: true });
+  res.status(201).send({ id: payment.id });
 });
 
 export { router as createChargeRouter };
