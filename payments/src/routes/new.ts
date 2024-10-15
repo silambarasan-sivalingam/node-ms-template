@@ -21,7 +21,7 @@ router.post('/api/payments', requireAuth, [
   if (order.userId !== req.currentUser!.id) {
     throw new NotAuthorizedError();
   }
-
+// 
   if (order.status === OrderStatus.Cancelled) {
     throw new BadRequestError('Cannot pay for an cancelled order');
   }
