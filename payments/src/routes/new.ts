@@ -34,7 +34,6 @@ router.post('/api/payments', requireAuth, [
     source: token
   });
 
-
   res.send({ success: true });
 });
 
