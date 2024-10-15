@@ -9,4 +9,8 @@ var Subjects;
     Subjects["OrderCancelled"] = "order:cancelled";
     Subjects["ExpirationComplete"] = "expiration:complete";
     Subjects["PaymentCreated"] = "payment:created";
+    Subjects["PaymentCancelled"] = "payment:cancelled";
+    Subjects["PaymentRefunded"] = "payment:refunded";
+    Subjects["PaymentFailed"] = "payment:failed";
+    Subjects["PaymentSuccess"] = "payment:success";
 })(Subjects || (exports.Subjects = Subjects = {}));
