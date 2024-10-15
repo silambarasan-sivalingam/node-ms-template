@@ -2,6 +2,8 @@ import { body } from 'express-validator';
 import exppress, { Request, Response } from 'express';
 import { requireAuth, validateRequest, BadRequestError, NotFoundError, NotAuthorizedError, OrderStatus } from '@silambarasansivalingam/common';
 import { Order} from '../models/order';
+import { stripe } from '../stripe';
+
 
 const router = exppress.Router();
 
@@ -25,6 +27,13 @@ router.post('/api/payments', requireAuth, [
   if (order.status === OrderStatus.Cancelled) {
     throw new BadRequestError('Cannot pay for an cancelled order');
   }
+
+  await stripe.charges.create({
+    currency: 'usd',
+    amount: order.price * 100,
+    source: token
+  });
+
 
   res.send({ success: true });
 });
