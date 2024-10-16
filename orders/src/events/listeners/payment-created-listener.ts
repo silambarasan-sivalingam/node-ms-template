@@ -6,7 +6,7 @@ import { Order } from '../../models/Order';
 
 export class PaymentCreatedListener extends Listener<PaymentCreatedEvent> {
   subject: Subjects.PaymentCreated = Subjects.PaymentCreated;
-  queueGroupName = 'payments-service';
+  queueGroupName = queueGroupName;
 
   async onMessage(data: PaymentCreatedEvent['data'], msg: Message) {
     const order = await Order.findById(data.orderId);
