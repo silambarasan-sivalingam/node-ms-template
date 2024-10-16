@@ -13,7 +13,7 @@ const NewTicket = () => {
             title,
             price
         },
-        onSuccess: (title) => console.log(title)
+        onSuccess: () => Router.push('/')
     });
 
     const onSubmit = async (event) => {
