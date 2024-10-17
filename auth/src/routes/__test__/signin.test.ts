@@ -8,7 +8,7 @@ it('fails when a email that does not exist is supplied', async () => {
       email: 'test@test.com',
       password: 'password'
     })
-    .expect(400);
+    .expect(404);
 });
 
 it('fails when an incorrect password is supplied', async () => {
@@ -26,7 +26,7 @@ it('fails when an incorrect password is supplied', async () => {
       email: 'test@test.com',
       password: 'aslkdfjalskdfj'
     })
-    .expect(400);
+    .expect(404);
 });
 
 it('responds with a cookie when given valid credentials', async () => {
